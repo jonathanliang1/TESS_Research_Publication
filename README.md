@@ -29,11 +29,13 @@ The repository also contains sensitivity and mechanism-oriented controls involvi
 .
 ├── data/
 │   ├── external_cache/
-│   │   └── gaia/
-│   │       ├── qlp/
-│   │       │   └── gaia_neighbors.parquet
-│   │       └── spoc/
-│   │           └── gaia_neighbors.parquet
+│   │   ├── gaia/
+│   │   │   ├── qlp/
+│   │   │   │   └── gaia_neighbors.parquet
+│   │   │   └── spoc/
+│   │   │       └── gaia_neighbors.parquet
+│   │   └── vsx/
+│   │       └── vsx_query_xml.tgz
 │   ├── processed/
 │   │   ├── QLP_TESSCut_features_QC.parquet
 │   │   ├── QLP_TESSCut_Metadata_Consolidated_QC.parquet
@@ -95,6 +97,40 @@ Important tables include:
 - `data/processed/QLP_TESSCut_features_QC.parquet`
 
 The two `gaia_neighbors.parquet` files preserve the external Gaia DR3 neighborhood-query results used in the crowding controls.
+
+### Saved VSX query responses
+
+`data/external_cache/vsx/vsx_query_xml.tgz` preserves the complete cache of **1,376 VSX XML/VOTable responses**, including responses that did not contribute stars to the final sample. These files allow the VSX sampling procedure to be inspected or rerun from saved catalogue responses without making new VSX queries. The saved study sample is `data/sample/VSXMetadata.parquet`, containing **8,062 stars**.
+
+An audit of the saved sample and archive found:
+
+| Recorded XML modification date | XML files referenced by the sample | Saved stars |
+|---|---:|---:|
+| 27 June 2026 | 798 | 8,000 across the eight non-XRAY families |
+| 29 August 2026 | 28 | 62 in the XRAY family |
+| **Total** | **826** | **8,062** |
+
+Every referenced XML file is present, and every star's saved `rawRow` matches a record in its referenced XML file exactly. The August files are consistent with the later XRAY-only query refresh performed while investigating the low XRAY count. These are recorded file modification dates, not independently verified download dates.
+
+From the repository root, extract only the XML files with:
+
+```bash
+tar -xzf data/external_cache/vsx/vsx_query_xml.tgz \
+    -C data/external_cache/vsx \
+    --strip-components=1 --wildcards 'VSXCache/*.xml'
+```
+
+This places the XML files directly under `data/external_cache/vsx/`, alongside the archive. It excludes the archive's additional parquet and Python files and leaves `data/sample/VSXMetadata.parquet` untouched. Extraction will replace existing XML files with the same names in that directory.
+
+Set `Project_Root` to the publication repository root and use:
+
+```python
+VSX_CACHE_FOLDER = os.path.join(Project_Root, "data", "external_cache", "vsx")
+```
+
+The saved `sourceXmlFile` values contain paths from the original research machine. When checking them against this cache, resolve each filename under `VSX_CACHE_FOLDER`; the original absolute paths are not expected to exist on another computer.
+
+For reproducing the reported analyses, use the saved study sample and derived tables. Rebuilding the sample from XML is a separate step that can overwrite metadata outputs, so use a separate output location if comparing a rebuilt sample with the archived one. A fresh query to the live VSX catalogue may return different records as the catalogue changes.
 
 ## Saved controlled-analysis results
 
@@ -174,14 +210,16 @@ The saved result tables allow the principal reported statistical results to be a
 
 ## Network-dependent stages
 
-The data-pipeline notebook keeps the two expensive catalogue stages independently opt-in:
+For reproduction from the saved data, set the following data-pipeline flags to `False` before running the corresponding sections:
 
 ```python
 RUN_VSX_CATALOG_QUERY = False
+RUN_XRAY_SPECIAL_REFRESH = False
 RUN_TESS_MATCH = False
+RUN_TESS_LIGHT_CURVE_DOWNLOAD = False
 ```
 
-They remain disabled by default. Set the corresponding flag to `True` only when intentionally repeating that external query stage.
+The XRAY-only refresh has its own switch: disabling `RUN_VSX_CATALOG_QUERY` does not disable `RUN_XRAY_SPECIAL_REFRESH`. Enable a query or download flag only when intentionally collecting fresh data, and use a separate cache location to preserve the study snapshot. These flags control their corresponding stages; they do not prevent other cells from rewriting local metadata or results.
 
 The crowding notebooks also contain Gaia-query logic. The repository includes the saved Gaia neighborhood-query results used for the reported analysis.
 
