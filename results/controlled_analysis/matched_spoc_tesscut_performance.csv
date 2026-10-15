@@ -1,0 +1,5 @@
+Provenance,split,accuracy,balanced_accuracy,sample_count
+SPOC,train,1.0,1.0,354
+SPOC,test,0.7631578947368421,0.5706796948799012,152
+TESSCut,train,1.0,1.0,354
+TESSCut,test,0.631578947368421,0.38684456238635806,152
