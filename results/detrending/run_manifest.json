@@ -152,18 +152,21 @@
   "fraction_trigger": 0.5,
   "inputs": {
     "SPOC": {
-      "metadata": "/data/projects/TESS-research/data_pipeline/SPOC_TESSCutCache/SPOC_TESSCut_Metadata_Consolidated_QC.parquet",
-      "features": "/data/projects/TESS-research/data_pipeline/SPOC_TESSCutCache/SPOC_TESSCut_features_QC.parquet",
+      "metadata": "/data/projects/TESS_Research_RASTI_Publication/data/SPOC_TESSCutCache/SPOC_TESSCut_Metadata_Consolidated_QC.parquet",
+      "features": "/data/projects/TESS_Research_RASTI_Publication/data/SPOC_TESSCutCache/SPOC_TESSCut_features_QC.parquet",
       "count": "506"
     },
     "QLP": {
-      "metadata": "/data/projects/TESS-research/data_pipeline/QLP_TESSCutCache/QLP_TESSCut_Metadata_Consolidated_QC.parquet",
-      "features": "/data/projects/TESS-research/data_pipeline/QLP_TESSCutCache/QLP_TESSCut_features_QC.parquet",
+      "metadata": "/data/projects/TESS_Research_RASTI_Publication/data/QLP_TESSCutCache/QLP_TESSCut_Metadata_Consolidated_QC.parquet",
+      "features": "/data/projects/TESS_Research_RASTI_Publication/data/QLP_TESSCutCache/QLP_TESSCut_features_QC.parquet",
       "count": "1355"
     }
   },
   "source_notebook_sha256": {
     "pipeline": "445d54e6ec73aa562a45615e800658d17aad17586dd5db6b9a1840090dd53c63",
     "extractor": "b8f28dfa60a87a19f88ec6c0da6f34b1cb26a98dc01f6ddf2d079463fb62b02f"
-  }
+  },
+  "post_detrending_standardization": "Exact pipeline _standardizeLightCurve and _storeLightCurve",
+  "no_detrending_raw_standardization_check": "required for all matched TESSCut stars",
+  "original_observational_metadata": "held fixed"
 }
