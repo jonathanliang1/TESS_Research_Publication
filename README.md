@@ -4,9 +4,7 @@ This repository contains the notebooks, saved study inputs, feature tables, and 
 
 **Jonathan Liang, “Quantifying the Impact of TESS Light-Curve Provenance on Random Forest Variable-Star Classification.”**
 
-Prepared for submission to *RAS Techniques and Instruments (RASTI)*.
-
-Repository: [TESS_Research_RASTI_Publication](https://github.com/jonathanliang1/TESS_Research_RASTI_Publication).
+Repository: [TESS_Research_Publication](https://github.com/jonathanliang1/TESS_Research_Publication).
 
 ## Study overview
 
@@ -66,7 +64,7 @@ The recorded analysis environment used Python 3.13. See `requirements.txt` and `
 For example, from a local clone or downloaded copy of this repository:
 
 ```bash
-cd /path/to/TESS_Research_RASTI_Publication
+cd /path/to/TESS_Research_Publication
 python3.13 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt

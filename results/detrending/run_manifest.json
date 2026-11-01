@@ -152,13 +152,13 @@
   "fraction_trigger": 0.5,
   "inputs": {
     "SPOC": {
-      "metadata": "/data/projects/TESS_Research_RASTI_Publication/data/SPOC_TESSCutCache/SPOC_TESSCut_Metadata_Consolidated_QC.parquet",
-      "features": "/data/projects/TESS_Research_RASTI_Publication/data/SPOC_TESSCutCache/SPOC_TESSCut_features_QC.parquet",
+      "metadata": "/data/projects/TESS_Research_Publication/data/SPOC_TESSCutCache/SPOC_TESSCut_Metadata_Consolidated_QC.parquet",
+      "features": "/data/projects/TESS_Research_Publication/data/SPOC_TESSCutCache/SPOC_TESSCut_features_QC.parquet",
       "count": "506"
     },
     "QLP": {
-      "metadata": "/data/projects/TESS_Research_RASTI_Publication/data/QLP_TESSCutCache/QLP_TESSCut_Metadata_Consolidated_QC.parquet",
-      "features": "/data/projects/TESS_Research_RASTI_Publication/data/QLP_TESSCutCache/QLP_TESSCut_features_QC.parquet",
+      "metadata": "/data/projects/TESS_Research_Publication/data/QLP_TESSCutCache/QLP_TESSCut_Metadata_Consolidated_QC.parquet",
+      "features": "/data/projects/TESS_Research_Publication/data/QLP_TESSCutCache/QLP_TESSCut_features_QC.parquet",
       "count": "1355"
     }
   },

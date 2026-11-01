@@ -1,5 +1,5 @@
 {
-  "analysis_name": "RASTI paper asset generation",
+  "analysis_name": "Publication paper asset generation",
   "models_refitted": false,
   "source_simulation_manifest": "/data/projects/TESS-research/summary/controlled_analysis_monte_carlo_v2/monte_carlo_run_manifest.json",
   "source_ablation_manifest": "/data/projects/TESS-research/summary/controlled_analysis_monte_carlo_v2/metadata_ablation_run_manifest.json",

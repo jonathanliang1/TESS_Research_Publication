@@ -1,4 +1,4 @@
-name: tess-provenance-rasti
+name: tess-provenance
 
 channels:
   - conda-forge
