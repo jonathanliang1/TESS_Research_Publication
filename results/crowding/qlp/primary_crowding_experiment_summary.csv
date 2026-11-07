@@ -1,9 +1,9 @@
 Metric,Value
-"QLP-TESSCut accuracy gap, least crowded quartile",0.10784313725490191
-"QLP-TESSCut accuracy gap, most crowded quartile",0.22549019607843135
-Change in accuracy gap Q4-Q1,0.11764705882352944
-"QLP-TESSCut balanced-accuracy gap, least crowded quartile",0.14396258503401355
-"QLP-TESSCut balanced-accuracy gap, most crowded quartile",0.1403673952165332
-Change in balanced-accuracy gap Q4-Q1,-0.00359518981748036
-Spearman crowding vs robust feature distance,0.049825265764051566
-Spearman p-value,0.06702657889239572
+"QLP-TESSCut accuracy gap, least crowded quartile",0.0980392156862745
+"QLP-TESSCut accuracy gap, most crowded quartile",0.18811881188118812
+Change in accuracy gap Q4-Q1,0.09007959619491362
+"QLP-TESSCut balanced-accuracy gap, least crowded quartile",0.12280219780219781
+"QLP-TESSCut balanced-accuracy gap, most crowded quartile",0.11884469696969702
+Change in balanced-accuracy gap Q4-Q1,-0.003957500832500793
+Spearman crowding vs robust feature distance,0.04945910861872733
+Spearman p-value,0.06926732269155643

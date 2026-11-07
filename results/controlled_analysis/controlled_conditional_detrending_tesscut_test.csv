@@ -1,3 +1,3 @@
 Model,EvaluationSubset,Accuracy,BalancedAccuracy,SampleCount
-Canonical mixed-provenance RF,TESSCut test stars,0.28776978417266186,0.2447129978912032,834
-Conditional-detrended mixed-provenance RF,TESSCut test stars,0.32014388489208634,0.2702962523119788,834
+Canonical mixed-provenance RF,TESSCut test stars,0.2997601918465228,0.25181955502542247,834
+Conditional-detrended mixed-provenance RF,TESSCut test stars,0.31534772182254195,0.2652649483578872,834

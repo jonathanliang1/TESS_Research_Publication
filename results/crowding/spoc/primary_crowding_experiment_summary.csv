@@ -3,7 +3,7 @@ Metric,Value
 "SPOC-TESSCut accuracy gap, most crowded quartile",0.10810810810810811
 Change in accuracy gap Q4-Q1,-0.027027027027026973
 "SPOC-TESSCut balanced-accuracy gap, least crowded quartile",0.3912087912087912
-"SPOC-TESSCut balanced-accuracy gap, most crowded quartile",0.27314814814814803
-Change in balanced-accuracy gap Q4-Q1,-0.11806064306064318
-Spearman crowding vs robust feature distance,0.22780517165320938
-Spearman p-value,3.3573382688631554e-07
+"SPOC-TESSCut balanced-accuracy gap, most crowded quartile",0.12037037037037035
+Change in balanced-accuracy gap Q4-Q1,-0.27083842083842086
+Spearman crowding vs robust feature distance,0.22726314314832494
+Spearman p-value,3.5857655985522046e-07

@@ -1,5 +1,5 @@
 Model,Split,Accuracy,BalancedAccuracy,SampleCount
-Canonical mixed-provenance RF,validation,0.40934065934065933,0.3979111708952146,1092
-Conditional-detrended mixed-provenance RF,validation,0.43040293040293043,0.41659331558578366,1092
-Canonical mixed-provenance RF,test,0.39158279963403475,0.34030757854177235,1093
-Conditional-detrended mixed-provenance RF,test,0.41537053979871913,0.362010349995991,1093
+Canonical mixed-provenance RF,validation,0.4194139194139194,0.3940584275648886,1092
+Conditional-detrended mixed-provenance RF,validation,0.42216117216117216,0.3964098001900529,1092
+Canonical mixed-provenance RF,test,0.3970722781335773,0.34497167039774845,1093
+Conditional-detrended mixed-provenance RF,test,0.4126258005489479,0.3597429612026716,1093
