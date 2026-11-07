@@ -1,18 +1,9 @@
 cff-version: 1.2.0
-message: "If you use this software or its derived data products, please cite the associated manuscript."
+message: "If you use this software, please cite it using the metadata below and record the release tag or commit used."
 title: "TESS Light-Curve Provenance and Random Forest Variable-Star Classification"
 type: software
 authors:
   - family-names: "Liang"
     given-names: "Jonathan"
-version: "1.0.0"
-date-released: "2026-10-07"
+repository-code: "https://github.com/jonathanliang1/TESS_Research_Publication"
 license: "MIT"
-preferred-citation:
-  type: article
-  authors:
-    - family-names: "Liang"
-      given-names: "Jonathan"
-  title: "Quantifying the Impact of TESS Light-Curve Provenance on Random Forest Variable-Star Classification"
-  journal: "RAS Techniques and Instruments"
-  year: 2026

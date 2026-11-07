@@ -8,28 +8,31 @@ Repository: [TESS_Research_Publication](https://github.com/jonathanliang1/TESS_R
 
 ## Study overview
 
-This study compares Random Forest variable-star classification using alternative light-curve representations from the Transiting Exoplanet Survey Satellite (TESS). The controlled comparisons use **506 matched SPOC–TESSCut stars** and **1,355 matched QLP–TESSCut stars**. SPOC is the Science Processing Operations Center; QLP is the Quick-Look Pipeline. The TESSCut representations are this study’s aperture-photometry extractions from full-frame-image cutouts.
+This study compares Random Forest variable-star classification using alternative light-curve representations from the Transiting Exoplanet Survey Satellite (TESS). The controlled comparisons use **506 matched SPOC–TESSCut stars** and **1,353 matched QLP–TESSCut stars**. SPOC is the Science Processing Operations Center; QLP is the Quick-Look Pipeline. The TESSCut representations are this study’s aperture-photometry extractions from full-frame-image cutouts.
 
 Within each comparison, the stars, class labels, 39 predictor definitions, model settings, and star-level train/test assignments are held fixed. The primary analysis uses 100 repeated stratified 70/30 train/test splits. Models are fitted separately for each representation.
 
 | Matched comparison | Official-product mean accuracy | TESSCut mean accuracy | Mean paired accuracy gap |
 |---|---:|---:|---:|
-| SPOC–TESSCut | 76.5% | 62.8% | 13.7 percentage points |
-| QLP–TESSCut | 67.6% | 52.5% | 15.1 percentage points |
+| SPOC–TESSCut | 76.6% | 62.8% | 13.7 percentage points |
+| QLP–TESSCut | 67.8% | 52.6% | 15.3 percentage points |
 
-The supporting analyses examine six-feature ablation, per-class paired errors, permutation-importance rankings, conditional detrending, sigma clipping, and aperture/crowding effects. The repository also retains the earlier full-dataset analyses. The controlled samples were drawn from the parent dataset; they are not assumed to preserve its class or sky coverage.
+The paired gaps were calculated before rounding the individual mean accuracies.
+
+The supporting analyses examine six-feature ablation, per-class paired errors, permutation-importance rankings, conditional detrending, sigma clipping, and aperture/crowding effects. The repository also retains the earlier full-dataset analyses. The controlled samples are subsets of the parent dataset, with their own class distributions and sky coverage.
 
 ## Choose what to reproduce
 
 | Goal | Required inputs | Starting point |
 |---|---|---|
-| Inspect the main results and regenerate summaries/figures | Saved files in Git | Notebook 04 with its three analysis flags set to `False` |
-| Refit the controlled models | Saved metadata, feature tables, and Gaia caches in Git | Notebooks 04–08, using the settings below |
-| Reprocess light curves and regenerate features | Git files plus the separate FITS archives | Configure local FITS paths before running the relevant processing sections |
+| Inspect archived results | The saved outputs | Open the summary files under `results/`. |
+| Regenerate summaries and figures | The validated saved inputs and outputs, validation helper, feature-validation sidecars, and the recorded configuration | Use notebook 04's saved-result mode once the prerequisites below are in place. |
+| Refit the controlled models | The matching metadata and feature tables, run settings, and the saved Gaia caches for crowding analyses | See notebooks 04–08 and the settings below. |
+| Reprocess light curves and regenerate features | The repository inputs plus the separate FITS archives | Configure local FITS paths before running the relevant processing sections. |
 
-New VSX queries and new TESS downloads are **not required** to repeat the analyses from the saved study inputs. Live catalogues can change, so a fresh query is not expected to reproduce the archived sample exactly.
+Start with the saved study inputs when reproducing the archived analyses. They preserve the original VSX sample and TESS acquisition results. Fresh queries can yield a different sample as the source catalogues change.
 
-Use a working copy for reruns. Several notebooks write to the same paths as the saved results. Preserve the release files for comparison. Reproducing results from saved features does not independently check the earlier photometry and feature-extraction steps.
+Use a working copy for reruns and archive the saved outputs for comparison. Several notebooks write to the same paths as the saved results. Replay from saved features covers the model analyses. Repeating the earlier photometry and feature extraction requires the relevant light-curve inputs.
 
 ## Repository layout
 
@@ -39,7 +42,7 @@ All paths below are relative to the repository root.
 |---|---|
 | `notebooks/` | Eight analysis notebooks, listed below |
 | `data/VSXCache/` | `VSXMetadata.parquet` and `VSX_TESS_MATCH_Metadata.parquet` |
-| `data/TESSCache/` | Full-dataset metadata: `TESSAugmented.parquet` and `TESSAugmented_QC.parquet`; destination for full-dataset FITS files |
+| `data/TESSCache/` | Full-dataset metadata (`TESSAugmented.parquet` and `TESSAugmented_QC.parquet`), SIMBAD proper-motion cache, and destination for full-dataset FITS files |
 | `data/feature_extraction/` | `TESS_features.parquet` and the saved full-dataset detrended feature table |
 | `data/SPOC_TESSCutCache/` | SPOC–TESSCut metadata, QC feature tables, and earlier detrended tables; destination for this comparison’s FITS files |
 | `data/QLP_TESSCutCache/` | QLP–TESSCut metadata, QC feature tables, and earlier detrended tables; destination for this comparison’s FITS files |
@@ -59,7 +62,7 @@ The earlier full-dataset detrending files under `data/detrend_tesscut/` are sepa
 
 ## Environment and local setup
 
-The recorded analysis environment used Python 3.13. See `requirements.txt` and `environment.yml` for dependencies. Use a dedicated environment rather than installing into the system Python environment.
+Use `requirements.txt` or `environment.yml` to set up a dedicated environment. For the archived controlled runs, the manifests record Python 3.13.0, NumPy 2.5.1, pandas 3.0.1, and scikit-learn 1.8.0. Consult the run manifests for the recorded configuration and platform when reproducing the saved results.
 
 For example, from a local clone or downloaded copy of this repository:
 
@@ -75,16 +78,16 @@ python -m jupyter lab
 
 Select a notebook kernel using this environment. If launching the kernel separately, set `Project_Root` in that kernel’s environment before running notebook configuration cells.
 
-All eight notebooks read `Project_Root`. Their fallback path is specific to the author’s computer. Setting this variable configures the repository location, but does **not** rewrite absolute FITS paths stored inside parquet tables. Additional path configuration is needed for FITS reprocessing, as described below.
+Set `Project_Root` to the local repository directory. The notebooks have an author-specific fallback path. Resolve absolute FITS paths stored in parquet metadata separately, as described below. Saved-run validation also checks paths, file hashes, and recorded software settings.
 
 ## Notebook guide and saved-input settings
 
-Read the notebooks in numerical order to follow the research workflow. It is not necessary to run notebooks 01–03 before notebook 04 when using the supplied tables.
+Read the notebooks in numerical order to follow the research workflow. For model reruns, start at notebook 04 with the validated feature inputs and metadata.
 
 | Notebook | Purpose and behavior with saved inputs |
 |---|---|
-| `01_data_pipeline.ipynb` | Sample construction, catalogue matching, acquisition, standardization, QC, and supporting diagnostics. Not needed for model reruns from saved features. Its Chapter 5 still attempts FITS processing, so `Run All` is not a saved-table-only workflow. |
-| `02_feature_extraction.ipynb` | Loads each configured feature parquet if it exists; otherwise extracts features from FITS. The repository supplies all six configured feature tables. There is currently no `RUN_FEATURE_EXTRACTION` switch. |
+| `01_data_pipeline.ipynb` | Sample construction, catalogue matching, acquisition, standardization, QC, and supporting diagnostics. Chapter 5 includes FITS processing. |
+| `02_feature_extraction.ipynb` | Feature extraction from light curves and reuse of cached feature tables. Confirm the input and cache validation requirements before running extraction. |
 | `03_analyze_comprehensive.ipynb` | Full-dataset models, representative matched comparisons, and exploratory diagnostics. Refits models and writes results. Keep the saved train/validation/test tables and all three phase-morphology caches together; retain `ForceRecomputePhaseFeatures=False`. Missing or incompatible morphology caches trigger FITS access. |
 | `04_controlled_analysis_monte_carlo.ipynb` | Main 100-split comparisons, ablation, paired errors, repeated importance, and the check of the 20 selected importance splits. Can load saved results or refit models. |
 | `05_controlled_detrending.ipynb` | Loads saved detrended features when `RUN_DETRENDING_FROM_FITS=False`. Still refits models across 100 splits and writes results. |
@@ -92,19 +95,21 @@ Read the notebooks in numerical order to follow the research workflow. It is not
 | `07_spoc_tess_aperture_crowding.ipynb` | SPOC–TESSCut crowding/aperture analysis. Set `RUN_GAIA_QUERY=False` to use the supplied Gaia cache. No FITS files are needed. |
 | `08_qlp_tesscut_aperture_crowding.ipynb` | QLP–TESSCut counterpart. Set `RUN_GAIA_QUERY=False` to use the supplied Gaia cache. No FITS files are needed. |
 
-### Main controlled analysis: notebook 04
+### Main controlled analysis (notebook 04)
 
-To load the saved results and regenerate summaries and figures, retain:
+Open the saved summaries in `results/controlled_analysis/` to inspect the archived results. Before using the saved-result workflow, obtain the matching `tess_research_validation.py` helper and the `QLP_TESSCut_features_QC.parquet.science_fix.json` and `SPOC_TESSCut_features_QC.parquet.science_fix.json` sidecars referenced by the manifests. Keep the sidecars with their feature tables and use the matching input and output hashes, paths, and software configuration recorded in the manifests.
+
+For regeneration from validated saved results, use these settings.
 
 ```python
 RUN_MONTE_CARLO = False
-RUN_REPEATED_PERMUTATION_IMPORTANCE = False
+RUN_REPEATED_PERMUTATION_IMPORTANCE = True
 RUN_METADATA_ABLATION = False
 ```
 
-The first two settings are in the main configuration cell; `RUN_METADATA_ABLATION` is defined later in the ablation section. Saved-result mode can still write summary tables and figures.
+The first two settings are in the main configuration cell. Set `RUN_METADATA_ABLATION` in the ablation configuration cell. The permutation setting matches the archived full-run manifest. The saved-result path can write new summary tables and figures after validation. Use a working copy.
 
-To recompute the complete repeated-split, permutation-importance, and ablation analyses from the saved features, set all three flags to `True` at their configuration locations. No FITS files are required. Preserve existing outputs first: recomputing the main models with permutation evaluation disabled does not regenerate the saved importance results and can replace their output files.
+For a deliberate refit of the repeated-split, permutation-importance, and ablation analyses, enable all three flags with validated saved feature inputs. Archive the saved results first so you can compare the refit with the published analysis.
 
 ### Controlled detrending and clipping: notebooks 05 and 06
 
@@ -118,23 +123,23 @@ Keep `RUN_SIGMA_CLIPPING_FROM_FITS=False` in notebook 06 to read:
 - `results/sigma_clipping/SPOC_TESSCut_features_sigma_clipped.parquet`
 - `results/sigma_clipping/QLP_TESSCut_features_sigma_clipped.parquet`
 
-These flags bypass light-curve processing, **not model fitting**. Both notebooks still calculate new model results. Notebook 05’s separate `RUN_LIGHT_CURVE_STANDARDIZATION=True` setting applies within its FITS-processing branch.
+With these settings, both notebooks refit models from saved features and write new results. Notebook 05 uses `RUN_LIGHT_CURVE_STANDARDIZATION` within the FITS-processing branch.
 
 ### Crowding: notebooks 07 and 08
 
-Set `RUN_GAIA_QUERY=False` in **both** notebooks before running. The supplied notebooks currently set this flag to `True`; disabling it explicitly prevents new Gaia queries. Keep the corresponding saved `gaia_neighbors.parquet` file in each configured cache folder.
+Set `RUN_GAIA_QUERY=False` in both notebooks to use the saved `gaia_neighbors.parquet` file in each configured cache folder.
 
-The aperture measurements are read from saved extraction metadata. These notebooks recalculate crowding measures and model results without opening FITS files.
+These notebooks use the saved extraction metadata for aperture measurements and the cached Gaia data for crowding. They recalculate the crowding measures and model results.
 
 ## FITS data availability and extraction
 
-The raw and standardized light-curve FITS files are distributed separately because of their size. A public archive download link is not yet provided here. To request the files, contact the author using the contact details in the associated manuscript. The repository already includes the feature tables needed for the model analyses described above.
+The stored pre-standardization and standardized light-curve FITS files, including the study-specific TESSCut extractions, comprise approximately 24.22 GB in compressed archives. Attempts to deposit the archives in Zenodo encountered transfer problems. The author retains the files and provides them on reasonable request using the contact details in the manuscript. The saved feature tables support model analyses from the extracted features.
 
 | Archive | Contents | Destination |
 |---|---|---|
-| `tesscache.tgz` | Full-dataset SPOC, QLP, and TESSCut light curves, raw and standardized | `data/TESSCache/` |
-| `spoc_tesscutcache.tgz` | Controlled SPOC–TESSCut light curves, raw and standardized | `data/SPOC_TESSCutCache/` |
-| `qlp_tesscutcache.tgz` | Controlled QLP–TESSCut light curves, raw and standardized | `data/QLP_TESSCutCache/` |
+| `tesscache.tgz` | Full-dataset SPOC, QLP, and TESSCut light curves, pre-standardization and standardized | `data/TESSCache/` |
+| `spoc_tesscutcache.tgz` | Controlled SPOC–TESSCut light curves, pre-standardization and standardized | `data/SPOC_TESSCutCache/` |
+| `qlp_tesscutcache.tgz` | Controlled QLP–TESSCut light curves, pre-standardization and standardized | `data/QLP_TESSCutCache/` |
 
 Before extraction, inspect the archive’s top-level entries, for example:
 
@@ -144,7 +149,7 @@ tar -tzf /path/to/tesscache.tgz | head -n 20
 
 If the archive already includes `TESSCache/` as its top-level directory, extract it into `data/`. If it contains only that directory’s contents, extract it into `data/TESSCache/`. Apply the same rule to the other two archives. Preserve internal subdirectories and avoid duplicate nesting such as `data/TESSCache/TESSCache/`. If an archive contains metadata or feature parquets, retain the versions supplied with the code release when adding the FITS files.
 
-These archives support reprocessing from saved light curves. They do not by themselves reproduce the earlier photometric extraction from TESS image cutouts. The source TESS observations are available through MAST; the acquisition and extraction procedures are documented in notebook 01.
+These archives support reprocessing from saved light curves. Repeating the earlier photometric extraction requires the source TESS image cutouts, available through MAST. The acquisition and extraction procedures are documented in notebook 01.
 
 ### Before reprocessing FITS files
 
@@ -157,13 +162,13 @@ Some FITS settings in the supplied notebooks still refer to an earlier `data/raw
 | 03 | The optional phase-morphology FITS path resolver |
 | 05 and 06 | `RawDataRoot` and the FITS path resolvers |
 
-Choose the base path that resolves the recorded relative paths to the extracted files. Absolute paths from the original computer need explicit remapping in a working copy. Verify required files before starting extraction; changing `Project_Root` alone is insufficient for those absolute paths.
+Choose the base path that resolves the recorded relative paths to the extracted files. Remap absolute paths from the original computer in a working copy and verify the required files before starting extraction.
 
-Notebook 02 skips extraction while its output feature parquets exist. For a deliberate extraction rerun, preserve those outputs and use a separate working copy with the intended output tables absent, or add an explicit recomputation control. Its additional detrended cases also require the corresponding derived light curves or regeneration of those files.
+For a deliberate extraction rerun, check notebook 02’s cache and recomputation logic in a working copy. Preserve the archived feature tables before writing new outputs. The detrended cases also require their corresponding derived light curves.
 
 After configuring and checking FITS paths, set `RUN_DETRENDING_FROM_FITS=True` in notebook 05 or `RUN_SIGMA_CLIPPING_FROM_FITS=True` in notebook 06 to repeat those processing steps.
 
-The optional proper-motion diagnostic in notebook 01 expects `data/external_cache/SimbadProperMotion.parquet`. This file is not included in this repository; that diagnostic needs the original cache or a separate SIMBAD query. It is not an input to the main controlled classification tests.
+The archive includes `data/TESSCache/SimbadProperMotion.parquet` for the optional proper-motion diagnostic in notebook 01. Set the diagnostic’s input path to that file if the local configuration uses a different cache directory. The controlled classification tests use the saved matched feature tables.
 
 ## Preserve the catalogue snapshot
 
@@ -180,13 +185,13 @@ RUN_COMPARABLE_SPOC_TESS_DOWNLOAD = False
 RUN_COMPARABLE_QLP_TESS_DOWNLOAD = False
 ```
 
-The controls occur in several sections; check each definition before running its section. They disable their respective queries and downloads but do not prevent other cells from processing FITS files or updating local metadata. In particular, notebook 01 can filter and rewrite `TESSAugmented.parquet`, and comparison-metadata consolidation is enabled in the supplied configuration.
+Check each control in its own section. Other cells can still process FITS or update local metadata. Use a working copy when running notebook 01 because it can rewrite `TESSAugmented.parquet` and consolidate comparison metadata.
 
 ### Archived VSX responses
 
 `data/external_cache/vsx/vsx_query_xml.tgz` contains 1,376 saved VSX XML/VOTable responses. The study’s `data/VSXCache/VSXMetadata.parquet` contains 8,062 stars and references 826 of those XML files. Extraction is unnecessary when using the saved sample and features.
 
-The earlier snapshot audit found all 826 referenced XML files and exact matches for the saved `rawRow` records. The referenced files had recorded modification dates of 27 June 2026 for 8,000 non-XRAY stars and 29 August 2026 for 62 XRAY stars, consistent with the later XRAY-only refresh. Modification dates are not independent verification of download dates.
+The earlier snapshot audit found all 826 referenced XML files and exact matches for the saved `rawRow` records. The referenced files had recorded modification dates of 27 June 2026 for 8,000 non-XRAY stars and 29 August 2026 for 62 XRAY stars, consistent with the later XRAY-only refresh. These are filesystem modification dates.
 
 To inspect the archived responses, extract only the XML files from the repository root:
 
@@ -200,14 +205,14 @@ This excludes the archive’s other files and leaves `data/VSXCache/VSXMetadata.
 
 ## Saved results and traceability
 
-`results/controlled_analysis/` includes the `monte_carlo_*` and `metadata_ablation_*` outputs, split assignments, paired predictions, fixed feature lists, importance summaries, per-class tables, and run manifests. `paper_asset_manifest.json` and `paper_figure_traceability_output.csv` record figure/output traceability. The detrending, sigma-clipping, and crowding directories retain their corresponding feature tables and summaries.
+`results/controlled_analysis/` includes the `monte_carlo_*` and `metadata_ablation_*` outputs, split assignments, paired predictions, fixed feature lists, importance summaries, per-class tables, and run manifests. The archived `paper_asset_manifest.json` and `paper_figure_traceability_output.csv` are in that directory. The paper export cells write regenerated assets under `results/controlled_analysis/paper_assets_output/` when the saved-run prerequisites are satisfied. The detrending, sigma-clipping, and crowding directories retain their corresponding feature tables and summaries.
 
-Use the saved split assignments and feature definitions when checking a rerun against the paper. Record the repository commit or release and the software environment used. Differences after changing inputs, preprocessing, software, or split settings should be examined rather than treated as a reproduction of the archived run.
+Use the saved split assignments and feature definitions when checking a rerun against the paper. Record the repository commit or release and the software environment used. If inputs, preprocessing, software, or split settings differ, record those differences alongside the new results.
 
 ## External data, citation, and license
 
 The study uses VSX, TESS/MAST, the TESS Input Catalog, SIMBAD, and Gaia DR3. Follow the citation and usage requirements of those catalogues, missions, and software packages.
 
-If using this work, cite the associated manuscript and the software metadata in [`CITATION.cff`](CITATION.cff). Identify the release tag or commit used.
+Cite the software using [`CITATION.cff`](CITATION.cff) and identify the release tag or commit used. Cite the associated manuscript when a citable record is available.
 
-The original code and repository-authored documentation are released under the MIT License; see [`LICENSE`](LICENSE). Third-party astronomical data retain their original terms and citation requirements. The MIT License does not relicense those data.
+The original code and repository-authored documentation are released under the MIT License. See [`LICENSE`](LICENSE). Third-party astronomical data retain their original terms and citation requirements.
