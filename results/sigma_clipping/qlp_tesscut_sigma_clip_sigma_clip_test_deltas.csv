@@ -1,0 +1,2 @@
+Comparison,AccuracyBefore,AccuracyAfter,AccuracyDelta,BalancedAccuracyBefore,BalancedAccuracyAfter,BalancedAccuracyDelta
+QLP vs TESSCut,0.5344827586206896,0.541871921182266,0.007389162561576401,0.27905704138580856,0.2887892844513849,0.009732243065576351

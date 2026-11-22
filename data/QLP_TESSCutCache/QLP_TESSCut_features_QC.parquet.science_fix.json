@@ -1,0 +1,21 @@
+{
+  "fap_policy": "periodogram_search_bounds",
+  "feature_file": "/data/projects/TESS_Research_Publication/data/QLP_TESSCutCache/QLP_TESSCut_features_QC.parquet",
+  "inputs": {
+    "/data/projects/TESS_Research_Publication/data/QLP_TESSCutCache/QLP_TESSCut_Metadata_Consolidated_QC.parquet": "96942af70a94bbbcc10447da8fc6de5b0a6b388f3bb9176c5bf4e446c0fd078b"
+  },
+  "metadata": {
+    "case": "QlpTesscutComparisonQC",
+    "fap_method": "baluev",
+    "loader_policy": "finite_time_flux_optional_positive_errors",
+    "maximum_period_days": 100.0,
+    "minimum_cadences": 100,
+    "minimum_period_days": 0.05,
+    "phase_bin_count": 20,
+    "samples_per_peak": 10,
+    "source_fits_inventory_policy": "path_size_mtime_ns",
+    "source_fits_inventory_sha256": "27b47f9ceda1f0fe3bf761c2d479984354997d7143493ef1a26c85ff0f16ebbe"
+  },
+  "output_sha256": "5bf80ab96a8a8dc89006025e20a2a69ef0f1529f720b6b5e722bf0e7c20c8a7e",
+  "science_fix_version": "eligibility_fap_v1"
+}

@@ -1,0 +1,21 @@
+{
+  "fap_policy": "periodogram_search_bounds",
+  "feature_file": "/data/projects/TESS_Research_Publication/data/feature_extraction/TESS_features.parquet",
+  "inputs": {
+    "/data/projects/TESS_Research_Publication/data/TESSCache/TESSAugmented_QC.parquet": "972841ab06115b160ca126fc956b231315d783bea2caec57c7bbc53c0e1a836e"
+  },
+  "metadata": {
+    "case": "NoDetrend",
+    "fap_method": "baluev",
+    "loader_policy": "finite_time_flux_optional_positive_errors",
+    "maximum_period_days": 100.0,
+    "minimum_cadences": 100,
+    "minimum_period_days": 0.05,
+    "phase_bin_count": 20,
+    "samples_per_peak": 10,
+    "source_fits_inventory_policy": "path_size_mtime_ns",
+    "source_fits_inventory_sha256": "b6bbd1341c3e1163e5a4b592a2df53fc9c4af10359ceb72b7525df4ae7de7a4b"
+  },
+  "output_sha256": "876abaeb367ea4cda5fadb63ee6e1b008b2b5d7bf0b3fc77c1e511aa69c2bc4f",
+  "science_fix_version": "eligibility_fap_v1"
+}

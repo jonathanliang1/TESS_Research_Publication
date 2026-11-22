@@ -1,0 +1,61 @@
+{
+  "config": {
+    "analysis": "matched_confusion",
+    "eligibility": {
+      "FeatureStatus": "ok",
+      "minimum_cadences": 100
+    },
+    "features": [
+      "QualityScore",
+      "OriginalFluxMedian",
+      "OriginalFluxStd",
+      "CadenceCount",
+      "TimeSpanDays",
+      "MedianCadenceDays",
+      "FluxStd",
+      "FluxMedian",
+      "FluxMad",
+      "FluxP05",
+      "FluxP90",
+      "FluxP95",
+      "FluxIqr",
+      "FluxAmplitude",
+      "FluxPercentAmplitude95To5",
+      "FluxSkewness",
+      "FluxKurtosis",
+      "TailAsymmetry",
+      "TailRatio",
+      "EtaVonNeumann",
+      "MaxAbsSlope",
+      "MedianAbsSuccessiveDiff",
+      "FractionBeyond1Std",
+      "FractionBeyond2Std",
+      "LsBestPeriod",
+      "LsMaxPower",
+      "LsFalseAlarmProbability",
+      "LsPeriod2",
+      "LsPeriod3",
+      "LsPeakPowerGap12",
+      "LsPeakPowerGap23",
+      "LsPowerRatio21",
+      "LsPowerRatio31",
+      "LsPeriodRatio21",
+      "LsPeriodRatio31",
+      "PhaseCurveStd",
+      "PhasePeakPhase",
+      "PhaseTroughPhase",
+      "PhasePeakToTroughPhaseDelta"
+    ],
+    "official_provenance": "SPOC",
+    "random_state": 42,
+    "test_size": 0.3
+  },
+  "inputs": {
+    "/data/projects/TESS_Research_Publication/data/SPOC_TESSCutCache/SPOC_TESSCut_features_QC.parquet": "58cdbbded2899ae4d6defdbe93e67c243e8b77493ad503970306459d8298d615"
+  },
+  "outputs": {
+    "/data/projects/TESS_Research_Publication/results/controlled_analysis/matched_spoc_tesscut_spoc_confusion_matrix_normalized.csv": "3c5e948d9a655fe3efeb97b2f1a1b04d19ff840e23b8afa08cdfb9eb8d27c810",
+    "/data/projects/TESS_Research_Publication/results/controlled_analysis/matched_spoc_tesscut_tesscut_confusion_matrix_normalized.csv": "6da43ad01272316e816adc0bc760601a89b649fa0774bbeff1014d77af7916df"
+  },
+  "science_fix_version": "eligibility_fap_v1"
+}

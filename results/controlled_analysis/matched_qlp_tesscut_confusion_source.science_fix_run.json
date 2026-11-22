@@ -1,0 +1,61 @@
+{
+  "config": {
+    "analysis": "matched_confusion",
+    "eligibility": {
+      "FeatureStatus": "ok",
+      "minimum_cadences": 100
+    },
+    "features": [
+      "QualityScore",
+      "OriginalFluxMedian",
+      "OriginalFluxStd",
+      "CadenceCount",
+      "TimeSpanDays",
+      "MedianCadenceDays",
+      "FluxStd",
+      "FluxMedian",
+      "FluxMad",
+      "FluxP05",
+      "FluxP90",
+      "FluxP95",
+      "FluxIqr",
+      "FluxAmplitude",
+      "FluxPercentAmplitude95To5",
+      "FluxSkewness",
+      "FluxKurtosis",
+      "TailAsymmetry",
+      "TailRatio",
+      "EtaVonNeumann",
+      "MaxAbsSlope",
+      "MedianAbsSuccessiveDiff",
+      "FractionBeyond1Std",
+      "FractionBeyond2Std",
+      "LsBestPeriod",
+      "LsMaxPower",
+      "LsFalseAlarmProbability",
+      "LsPeriod2",
+      "LsPeriod3",
+      "LsPeakPowerGap12",
+      "LsPeakPowerGap23",
+      "LsPowerRatio21",
+      "LsPowerRatio31",
+      "LsPeriodRatio21",
+      "LsPeriodRatio31",
+      "PhaseCurveStd",
+      "PhasePeakPhase",
+      "PhaseTroughPhase",
+      "PhasePeakToTroughPhaseDelta"
+    ],
+    "official_provenance": "QLP",
+    "random_state": 42,
+    "test_size": 0.3
+  },
+  "inputs": {
+    "/data/projects/TESS_Research_Publication/data/QLP_TESSCutCache/QLP_TESSCut_features_QC.parquet": "5bf80ab96a8a8dc89006025e20a2a69ef0f1529f720b6b5e722bf0e7c20c8a7e"
+  },
+  "outputs": {
+    "/data/projects/TESS_Research_Publication/results/controlled_analysis/matched_qlp_tesscut_qlp_confusion_matrix_normalized.csv": "051215e6270c554ce089e85d13af1a7021ad0eb8dd7c37e38f007e701d6ed554",
+    "/data/projects/TESS_Research_Publication/results/controlled_analysis/matched_qlp_tesscut_tesscut_confusion_matrix_normalized.csv": "37ad51ad41a495c65ee3ed594e41f699b3c1521acb5b4fa182f694dad1927e8a"
+  },
+  "science_fix_version": "eligibility_fap_v1"
+}

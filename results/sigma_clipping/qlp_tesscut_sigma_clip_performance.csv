@@ -1,0 +1,7 @@
+Model,split,accuracy,balanced_accuracy,sample_count
+QLP,train,1.0,1.0,947
+QLP,test,0.6945812807881774,0.42650279705074223,406
+TESSCut_old,train,1.0,1.0,947
+TESSCut_old,test,0.5344827586206896,0.27905704138580856,406
+TESSCut_sigma_clipped,train,1.0,1.0,947
+TESSCut_sigma_clipped,test,0.541871921182266,0.2887892844513849,406

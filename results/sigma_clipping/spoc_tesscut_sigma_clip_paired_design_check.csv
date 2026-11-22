@@ -1,0 +1,6 @@
+Check,Passed
+both_baseline_representations_eligible,True
+processed_representation_eligible,True
+shared_object_ids_and_labels_before_splitting,True
+disjoint_shared_train_test_ids,True
+frozen_predictor_schema,True

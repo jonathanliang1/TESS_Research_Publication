@@ -1,0 +1,7 @@
+Model,split,accuracy,balanced_accuracy,sample_count
+SPOC,train,1.0,1.0,354
+SPOC,test,0.7631578947368421,0.5714733456735521,152
+TESSCut_old,train,1.0,1.0,354
+TESSCut_old,test,0.631578947368421,0.38684456238635806,152
+TESSCut_sigma_clipped,train,1.0,1.0,354
+TESSCut_sigma_clipped,test,0.618421052631579,0.3747686208986518,152

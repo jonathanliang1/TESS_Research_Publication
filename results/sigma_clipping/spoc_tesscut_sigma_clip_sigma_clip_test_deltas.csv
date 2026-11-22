@@ -1,0 +1,2 @@
+Comparison,AccuracyBefore,AccuracyAfter,AccuracyDelta,BalancedAccuracyBefore,BalancedAccuracyAfter,BalancedAccuracyDelta
+SPOC vs TESSCut,0.631578947368421,0.618421052631579,-0.013157894736842035,0.38684456238635806,0.3747686208986518,-0.012075941487706243
